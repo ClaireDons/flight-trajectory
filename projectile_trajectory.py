@@ -2,6 +2,24 @@
 
 import numpy as np
 
+def calculate_initial_conditions(r, rho_proj, angle):
+    """Calculate initial conditions of launch
+    
+    Args:
+        r: projectile radius
+        rho_proj: projectile density
+        angle: launch angle
+    returns:
+        A: frontal area
+        theta: launch angle in radians
+        proj_mass: projectile mass
+    """
+    A = np.pi * r**2 # Calculate frontal area
+    theta = np.radians(angle) # angle to radians
+    proj_vol = 4/3 * np.pi * r**3 # projectile volume
+    proj_mass = rho_proj * proj_vol # projectile mass
+    return A, theta, proj_mass
+
 def calculate_acceleration(proj_mass, rho_air, v0_x, v0_y, Cd, A):
     """Calculate projectile acceleration
     
@@ -17,7 +35,7 @@ def calculate_acceleration(proj_mass, rho_air, v0_x, v0_y, Cd, A):
         ax: x acceleration
         ay: y acceleration
     """
-    g = 9.81
+    g = 9.81 # m/s^2
     v_mag = np.sqrt(v0_x**2 + v0_y**2)
     F_drag = 0.5 * rho_air * v_mag**2 * Cd * A
 
@@ -70,5 +88,6 @@ def projectile_trajectory(proj_mass, v0, A, theta, dt = 0.001, x=0, y=0, rho_air
         x_positions.append(x)
         y_positions.append(y)
 
-    print(f"Total flight time: {t}")
+    print(f"Total flight time: {t} seconds")
+    print(f"Total distance: {x} metres")
     return x_positions, y_positions
