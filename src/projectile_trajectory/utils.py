@@ -47,7 +47,7 @@ def calculate_acceleration(proj_mass, rho_air, v0_x, v0_y, Cd, A):
 
     return ax, ay
 
-def projectile_trajectory(proj_mass, v0, A, theta, dt = 0.001, x=0, y=0, rho_air=1.225, Cd=0.47):
+def calculate_trajectory(proj_mass, v0, A, theta, dt = 0.001, x=0, y=0, rho_air=1.225, Cd=0.47):
     """Calculate projectile trajectory
     
     Args:
